@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Digital Timer</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Timer des coachs agiles" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="icon" href="assets/files/agile.png">
+    <link rel="stylesheet" href="assets/css/style-1.css">
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="steps">
+        <div id="step-2" class="step" style="text-align: center;">
+          <h1 class="descriptif"><span class="text-style-1">Digital</span> Timer</h1>
+          <figure class="clock"></figure>
+          <div class="btn-actions">
+            <button id="btnStart" class="button startTimer">Démarrer</button>
+            <button id="btnPlay" class="button playTimer hide"><span class="currentTime"> 00 : 00 </span><img src="assets/icons/SVG/play-b.svg" class="pull-right" alt=""></button>
+            <button id="btnPause" class="button pauseTimer hide"><span class="currentTime"> 00 : 00 </span><img src="assets/icons/SVG/pause.svg" class="pull-right" alt=""></button>
+            <button id="btnStop" class="button stopTimer hide"><span class="currentTime"> 00 : 00 </span><img src="assets/icons/SVG/stop.svg" class="pull-right" alt=""></button>
+          </div>
+          <a id="btnReset" class="resetimer" href="javascript:void(0);">Remettre à zero</a>
+        </div>
+      </div>
+    </div>
+    <audio class="audio" id="myAudio"><source src="assets/files/system-fault.ogg" type="audio/ogg"></audio>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/countdowntimer.js"></script>
+    <script src="assets/plugins/easytimer/dist/easytimer.min.js"></script>
+    <script src="assets/plugins/d3/d3.3.5.5.min.js"></script>
+    <script src="assets/js/script-2.js"></script>
+    <script src="assets/js/timer.init.js"></script>
+  </body>
+</html>
