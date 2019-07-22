@@ -8,6 +8,8 @@ var btnPause = document.querySelector('#btnPause');
 var btnStop = document.querySelector('#btnStop');
 var btnReset = document.querySelector('#btnReset');
 var myAudio = document.getElementById('myAudio');
+var slider = document.getElementById('myRange');
+var output = document.getElementById('valeurSlider');
 var canDrag = true;
 var timerStart = false;
 var timerPause = false;
@@ -124,6 +126,8 @@ function drag() {
 	sec = 3600 - Math.round(Math.round(arcMouse) * 60 / 360) * 60;
 
 	var timeObj = CountDownTimer.parse(sec);
+
+	slider.value = timeObj.minutes;
 
 	format(timeObj.minutes, timeObj.seconds);
 
@@ -383,6 +387,26 @@ sliderGroup.append('circle').classed('slider', true).attr({
 });
 
 $(function() {
+	output.innerHTML = slider.value; // Display the default slider value
+
+	// Update the current slider value (each time you drag the slider handle)
+	slider.addEventListener(
+		'input',
+		function() {
+			output.innerHTML = this.value;
+			sec = this.value * 60;
+			var which = 'hour';
+			var arcMouse = (3600 - sec) / 3600 * 360;
+			var deg = arcMouse > 270 ? arcMouse - 360 : arcMouse;
+			var mouse = (deg - 90) / 180 * Math.PI;
+			var timeObj = CountDownTimer.parse(sec);
+
+			format(timeObj.minutes, timeObj.seconds);
+			mouveArc(which, mouse, arcMouse);
+		},
+		false
+	);
+
 	btnStart.addEventListener('click', function() {
 		btnStart.classList.add('hide');
 		eventFire(btnPlay, 'click');
@@ -405,6 +429,7 @@ $(function() {
 			return;
 		}
 		sec = 3600;
+		slider.value = 60;
 		var which = 'hour';
 		var arcMouse = (3600 - sec) / 3600 * 360;
 		var deg = arcMouse > 270 ? arcMouse - 360 : arcMouse;
@@ -416,6 +441,7 @@ $(function() {
 		timerPause = false;
 		timerEnd = false;
 		canDrag = true;
+		slider.disabled = false;
 		btnReset.classList.remove('can-reset');
 		btnPlay.classList.remove('hide');
 		btnStart.classList.add('hide');
@@ -445,6 +471,7 @@ $(function() {
 			timerPause = false;
 		}
 		canDrag = false;
+		slider.disabled = true;
 		btnPlay.classList.add('hide');
 		btnPause.classList.remove('hide');
 	});
@@ -487,6 +514,7 @@ $(function() {
 		myAudio.play();
 	});
 
+	//simulateur d'evenement
 	function eventFire(el, etype) {
 		if (el.fireEvent) {
 			el.fireEvent('on' + etype);
