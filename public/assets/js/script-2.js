@@ -9,7 +9,6 @@ var btnStop = document.querySelector('#btnStop');
 var btnReset = document.querySelector('#btnReset');
 var myAudio = document.getElementById('myAudio');
 var slider = document.getElementById('myRange');
-var output = document.getElementById('valeurSlider');
 var canDrag = true;
 var timerStart = false;
 var timerPause = false;
@@ -387,13 +386,10 @@ sliderGroup.append('circle').classed('slider', true).attr({
 });
 
 $(function() {
-	output.innerHTML = slider.value; // Display the default slider value
-
 	// Update the current slider value (each time you drag the slider handle)
 	slider.addEventListener(
 		'input',
 		function() {
-			output.innerHTML = this.value;
 			sec = this.value * 60;
 			var which = 'hour';
 			var arcMouse = (3600 - sec) / 3600 * 360;
@@ -402,6 +398,11 @@ $(function() {
 			var timeObj = CountDownTimer.parse(sec);
 
 			format(timeObj.minutes, timeObj.seconds);
+
+			btnPlay.classList.remove('hide');
+			btnStart.classList.add('hide');
+			btnPause.classList.add('hide');
+			btnStop.classList.add('hide');
 			mouveArc(which, mouse, arcMouse);
 		},
 		false
@@ -430,6 +431,7 @@ $(function() {
 		}
 		sec = 3600;
 		slider.value = 60;
+		output.innerHTML = 60;
 		var which = 'hour';
 		var arcMouse = (3600 - sec) / 3600 * 360;
 		var deg = arcMouse > 270 ? arcMouse - 360 : arcMouse;
