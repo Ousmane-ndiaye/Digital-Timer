@@ -386,6 +386,8 @@ sliderGroup.append('circle').classed('slider', true).attr({
 });
 
 $(function() {
+	var noSleep = new NoSleep();
+	noSleep.enable(); // keep the screen on!
 	// Update the current slider value (each time you drag the slider handle)
 	slider.addEventListener(
 		'input',
