@@ -431,7 +431,6 @@ $(function() {
 		}
 		sec = 3600;
 		slider.value = 60;
-		output.innerHTML = 60;
 		var which = 'hour';
 		var arcMouse = (3600 - sec) / 3600 * 360;
 		var deg = arcMouse > 270 ? arcMouse - 360 : arcMouse;
